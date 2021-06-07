@@ -1,3 +1,13 @@
+.form {
+  background-color: #4CAF50; /* Green */
+  border-style: rounded;
+  color: white;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 .App {
   text-align: center;
 }
