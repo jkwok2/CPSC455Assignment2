@@ -9,6 +9,12 @@ export function Body() {
         imageurl: ""
     });
 
+    const [details, setDetails] = useState({
+        name: "no picture selected",
+        url: "no picture selected",
+        height: 0
+    });
+
     let cardlist = [
         {
             name: "cat1",
@@ -39,8 +45,12 @@ export function Body() {
     }
 
     function handleSubmit(e) {
-        setList([...list, {name: cardToAdd.imagename, url: cardToAdd.imageurl}])
+        setList([...list, { name: cardToAdd.imagename, url: cardToAdd.imageurl }])
         e.preventDefault()
+    }
+
+    function handleCallback(childData) {
+        setDetails(childData);
     }
 
     return (
@@ -50,7 +60,11 @@ export function Body() {
                     <h2>List of Images</h2>
                     <ul id="cardlist">
                         {list.map((item) => (
-                            <Card name={item.name} url={item.url}></Card>
+                            <Card
+                                name={item.name}
+                                url={item.url}
+                                parentCallback={handleCallback}
+                            ></Card>
                         ))}
                     </ul>
                 </div>
@@ -59,14 +73,14 @@ export function Body() {
                 <h2>Add Image</h2>
                 <form class="form" onSubmit={handleSubmit}>
                     <label>Name</label><br />
-                    <input type="text" onChange={handleName} onPaste={handleName}/><br />
+                    <input type="text" onChange={handleName} onPaste={handleName} /><br />
                     <label>Image URL</label> <br />
                     <input type="text" onChange={handleURL} onPaste={handleURL} />
                     <input type="submit" value="Submit" />
                     <input type="reset" value="Clear" />
                 </form>
                 <h2>Card Details</h2>
-                <CardDetails/>
+                <CardDetails details={details} />
             </Grid>
         </Grid>
     );

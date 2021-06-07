@@ -1,8 +1,11 @@
 import React from 'react';
 
 export function Card(props) {
-    function handleclick(event) {
-        alert(new Date())
+    let origHeight = 0;
+    
+    function handleclick({target:img}) {
+        origHeight = img.naturalHeight;
+        props.parentCallback({name: props.name, url: props.url, height: origHeight})
     }
 
     return (
