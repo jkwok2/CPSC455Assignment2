@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from "./Card";
 import Grid from '@material-ui/core/Grid';
 import { CardDetails } from "./CardDetails"
 
 export function Body() {
-    let imgname = "";
-    let imgurl = "";
+    const [cardToAdd, setCard] = useState({
+        imagename: "",
+        imageurl: ""
+    });
 
     let cardlist = [
         {
@@ -21,15 +23,23 @@ export function Body() {
 
 
     function handleName(event) {
-        imgname = event.target.value;
+        let tempCard = {
+            imagename: event.target.value,
+            imageurl: cardToAdd.imageurl
+        }
+        setCard(tempCard);
     }
 
     function handleURL(event) {
-        imgurl = event.target.value;
+        let tempCard = {
+            imagename: cardToAdd.imagename,
+            imageurl: event.target.value
+        }
+        setCard(tempCard);
     }
 
     function handleSubmit(e) {
-        setList([...list, { name: imgname, url: imgurl }])
+        setList([...list, {name: cardToAdd.imagename, url: cardToAdd.imageurl}])
         e.preventDefault()
     }
 
@@ -49,9 +59,9 @@ export function Body() {
                 <h2>Add Image</h2>
                 <form class="form" onSubmit={handleSubmit}>
                     <label>Name</label><br />
-                    <input type="text" onChange={handleName} /><br />
+                    <input type="text" onChange={handleName} onPaste={handleName}/><br />
                     <label>Image URL</label> <br />
-                    <input type="text" onChange={handleURL} />
+                    <input type="text" onChange={handleURL} onPaste={handleURL} />
                     <input type="submit" value="Submit" />
                     <input type="reset" value="Clear" />
                 </form>

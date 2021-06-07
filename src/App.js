@@ -1,6 +1,5 @@
 import './App.css';
 import { Body } from "./components/Body"
-import Grid from '@material-ui/core/Grid';
 
 function App() {
   return (
