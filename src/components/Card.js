@@ -1,12 +1,16 @@
 import React from 'react';
 
 export function Card(props) {
+    function handleclick(event) {
+        alert("fuck!")
+    }
+
     return (
-        <div>
-            <p>{props.name}</p>
+        <div class="cardlistElem">
+            <h4>{props.name}</h4>
             <img 
             height="350"
-            src={props.url}></img>
+            src={props.url} onClick={handleclick}></img>
         </div>
     );
 }

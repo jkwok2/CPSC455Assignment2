@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card } from "./Card";
+import Grid from '@material-ui/core/Grid';
+import { CardDetails } from "./CardDetails"
 
 export function Body() {
     let imgname = "";
@@ -7,7 +9,7 @@ export function Body() {
 
     let cardlist = [
         {
-            name: "ca122t1",
+            name: "cat1",
             url: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg"
         },
         {
@@ -16,8 +18,8 @@ export function Body() {
         }
     ]
     const [list, setList] = React.useState(cardlist);
-    
-    
+
+
     function handleName(event) {
         imgname = event.target.value;
     }
@@ -27,26 +29,35 @@ export function Body() {
     }
 
     function handleSubmit(e) {
-        // let imgToAdd = {name: imgname, url: imgurl}
-        // cardlist.push(imgToAdd)
-        setList([...list, {name: imgname, url: imgurl}])
+        setList([...list, { name: imgname, url: imgurl }])
         e.preventDefault()
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>Name</label>
-                <input type="text" onChange={handleName}/>
-                <label>Image URL</label>
-                <input type="text" onChange={handleURL}/>
-                <input type="submit" value="Submit"/>
-            </form>
-            <ul>
-                {list.map((item) => (
-                    <Card name={item.name} url={item.url}></Card>
-                ))}
-            </ul>
-        </div>
+        <Grid container spacing={2}>
+            <Grid item xs>
+                <div>
+                    <h2>List of Images</h2>
+                    <ul id="cardlist">
+                        {list.map((item) => (
+                            <Card name={item.name} url={item.url}></Card>
+                        ))}
+                    </ul>
+                </div>
+            </Grid>
+            <Grid item xs={3}>
+                <h2>Add Image</h2>
+                <form class="form" onSubmit={handleSubmit}>
+                    <label>Name</label><br />
+                    <input type="text" onChange={handleName} /><br />
+                    <label>Image URL</label> <br />
+                    <input type="text" onChange={handleURL} />
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Clear" />
+                </form>
+                <h2>Card Details</h2>
+                <CardDetails/>
+            </Grid>
+        </Grid>
     );
 }

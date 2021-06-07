@@ -1,28 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import {Form} from "./components/Form"
-import {Card} from "./components/Card"
-import {List} from "./components/List"
-import {Body} from "./components/Body"
+import { Body } from "./components/Body"
+import Grid from '@material-ui/core/Grid';
 
 function App() {
   return (
     <div className="App">
+      <h1>Trading Card Website</h1>
       <Body/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
