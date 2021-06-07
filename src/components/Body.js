@@ -27,9 +27,9 @@ export function Body() {
     }
 
     function handleSubmit(e) {
-        let imgToAdd = {name: imgname, url: imgurl}
-        cardlist.push(imgToAdd)
-        setList(cardlist)
+        // let imgToAdd = {name: imgname, url: imgurl}
+        // cardlist.push(imgToAdd)
+        setList([...list, {name: imgname, url: imgurl}])
         e.preventDefault()
     }
 
