@@ -12,7 +12,7 @@ export function Body() {
     const [details, setDetails] = useState({
         name: "no picture selected",
         url: "no picture selected",
-        height: 0
+        height: "n/a"
     });
 
     let cardlist = [
@@ -53,11 +53,22 @@ export function Body() {
         setDetails(childData);
     }
 
+    function handleDeleteAll() {
+        setList([]);
+        let tempDetails = {
+            name: "no picture selected",
+            url: "no picture selected",
+            height: "n/a"
+        };
+        setDetails(tempDetails)
+    }
+
     return (
         <Grid container spacing={2}>
             <Grid item xs>
                 <div>
                     <h2>List of Images</h2>
+                    <button onClick={handleDeleteAll}>Delete All Cards</button>
                     <ul id="cardlist">
                         {list.map((item) => (
                             <Card
