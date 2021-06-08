@@ -68,7 +68,6 @@ export function Body() {
             <Grid item xs>
                 <div>
                     <h2>List of Images</h2>
-                    <button onClick={handleDeleteAll}>Delete All Cards</button>
                     <ul id="cardlist">
                         {list.map((item) => (
                             <Card
@@ -81,6 +80,8 @@ export function Body() {
                 </div>
             </Grid>
             <Grid item xs={3}>
+                <h2>Delete All Cards</h2>
+                <button onClick={handleDeleteAll}>Delete All Cards</button>
                 <h2>Add Image</h2>
                 <form class="form" onSubmit={handleSubmit}>
                     <label>Name</label><br />
