@@ -15,7 +15,10 @@ export function Body() {
         url: "no picture selected",
         height: "n/a"
     });
-
+    
+    const [index, setIndex] = useState(0);
+    const [cardID, setCardID] = React.useState(2);
+    
     let cardlist = []
 
     const [list, setList] = React.useState(cardlist);
@@ -30,7 +33,7 @@ export function Body() {
     function handleName(event) {
         let tempCard = {
             imagename: event.target.value,
-            imageurl: cardToAdd.imageurl
+            imageurl: cardToAdd.imageurl,
         }
         setCard(tempCard);
     }
@@ -38,23 +41,35 @@ export function Body() {
     function handleURL(event) {
         let tempCard = {
             imagename: cardToAdd.imagename,
-            imageurl: event.target.value
+            imageurl: event.target.value,
         }
         setCard(tempCard);
     }
 
     function handleSubmit(e) {
         // setList([...list, { name: cardToAdd.imagename, url: cardToAdd.imageurl }])
-        let obj = { name: cardToAdd.imagename, url: cardToAdd.imageurl }
+        let obj = {
+            name: cardToAdd.imagename,
+            url: cardToAdd.imageurl,
+            id: cardID
+        }
+        setCardID(cardID + 1)
         e.preventDefault()
         axios.post("http://localhost:5000/cardlist/add", obj)
             .then((response) => {
-                console.log(response);
+                setList(response.data)
             })
     }
 
     function handleCallback(childData) {
         setDetails(childData);
+    }
+
+    function handleDeleteCallback() {
+        axios.get("http://localhost:5000/cardlist")
+            .then((response) => {
+                setList(response.data);
+            })
     }
 
     function handleDeleteAll() {
@@ -77,7 +92,9 @@ export function Body() {
                             <Card
                                 name={item.name}
                                 url={item.url}
+                                id={item.id}
                                 parentCallback={handleCallback}
+                                onChildClick={handleDeleteCallback}
                             ></Card>
                         ))}
                     </ul>
