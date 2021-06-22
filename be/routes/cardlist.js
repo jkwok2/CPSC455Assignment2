@@ -2,15 +2,14 @@ const express = require('express');
 const router = express.Router();
 const data = require("../public/data")
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
-
 router.get('/', (req, res) => {
     res.send(data);
 })
 
-router.post('/', (req, res) => {
-    res.send("foo");
+router.post('/add', (req, res) => {
+    let cardToAdd = req.body;
+    data.push(cardToAdd);
+    res.send("post request complete")
 })
 
 module.exports = router;

@@ -1,4 +1,4 @@
-let cardlist = [
+let data = [
     {
         name: "maya",
         url: "https://www.usmagazine.com/wp-content/uploads/2018/11/Maya-The-Dog-3.jpg?w=700&quality=86&strip=all"

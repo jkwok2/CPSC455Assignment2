@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from "./Card";
 import Grid from '@material-ui/core/Grid';
 import { CardDetails } from "./CardDetails"
@@ -20,6 +20,12 @@ export function Body() {
 
     const [list, setList] = React.useState(cardlist);
 
+    useEffect(() => {
+        axios.get("http://localhost:5000/cardlist")
+            .then((response) => {
+                setList(response.data);
+            })
+    }, []);
 
     function handleName(event) {
         let tempCard = {
@@ -38,8 +44,13 @@ export function Body() {
     }
 
     function handleSubmit(e) {
-        setList([...list, { name: cardToAdd.imagename, url: cardToAdd.imageurl }])
+        // setList([...list, { name: cardToAdd.imagename, url: cardToAdd.imageurl }])
+        let obj = { name: cardToAdd.imagename, url: cardToAdd.imageurl }
         e.preventDefault()
+        axios.post("http://localhost:5000/cardlist/add", obj)
+            .then((response) => {
+                console.log(response);
+            })
     }
 
     function handleCallback(childData) {
@@ -55,11 +66,6 @@ export function Body() {
         };
         setDetails(tempDetails)
     }
-
-    axios.get("http://localhost:5000/cardlist")
-        .then((response) => {
-            setList(response.data);
-        })
 
     return (
         <Grid container spacing={2}>
