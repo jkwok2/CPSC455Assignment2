@@ -51,7 +51,8 @@ export function Body() {
         let obj = {
             name: cardToAdd.imagename,
             url: cardToAdd.imageurl,
-            id: cardID
+            _id: cardID,
+            cuteness: Math.floor(Math.random() * 10)
         }
         setCardID(cardID + 1)
         e.preventDefault()
@@ -92,7 +93,7 @@ export function Body() {
                             <Card
                                 name={item.name}
                                 url={item.url}
-                                id={item.id}
+                                id={item._id}
                                 parentCallback={handleCallback}
                                 onChildClick={handleDeleteCallback}
                             ></Card>

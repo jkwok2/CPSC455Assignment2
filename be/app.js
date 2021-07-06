@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 const mongoose = require("mongoose");
-const { MongoClient } = require('mongodb');
 require('dotenv').config()
 const uri = process.env.ATLAS_URI;
 
