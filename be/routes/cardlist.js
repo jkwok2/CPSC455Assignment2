@@ -24,10 +24,23 @@ router.get('/', async function (req, res) {
     }    
 })
 
-router.post('/add', (req, res) => {
-    let cardToAdd = req.body;
-    data.push(cardToAdd);
-    res.send(data)
+router.post('/add', async function (req, res) {
+    let cardToAdd = new Card({
+        name: req.body.name,
+        url: req.body.url,
+        _id: req.body._id,
+        cuteness: req.body.cuteness
+    });
+    try {
+        await cardToAdd.save();
+        let newCardList = await Card.find();
+        res.send(newCardList);
+    } catch (err) {
+        res.send(err);
+    }
+    // data.push(cardToAdd);
+    // console.log(cardToAdd)
+    // res.send(data)
 })
 
 router.delete('/del/:id', (req, res) => {
