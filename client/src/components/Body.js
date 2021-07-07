@@ -13,7 +13,8 @@ export function Body() {
     const [details, setDetails] = useState({
         name: "no picture selected",
         url: "no picture selected",
-        height: "n/a"
+        height: "n/a",
+        cuteness: "n/a"
     });
     
     const [cardID, setCardID] = React.useState(0);
@@ -97,6 +98,7 @@ export function Body() {
                                 name={item.name}
                                 url={item.url}
                                 id={item._id}
+                                cuteness={item.cuteness}
                                 parentCallback={handleCallback}
                                 delCallback={handleDeleteCallback}
                             ></Card>

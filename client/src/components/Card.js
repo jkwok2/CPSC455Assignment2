@@ -6,7 +6,7 @@ export function Card(props) {
 
     function handleclick({ target: img }) {
         origHeight = img.naturalHeight;
-        props.parentCallback({ name: props.name, url: props.url, height: origHeight })
+        props.parentCallback({ name: props.name, url: props.url, height: origHeight, cuteness: props.cuteness})
     }
 
     // function handleDelete() {

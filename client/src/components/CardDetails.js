@@ -11,6 +11,7 @@ export function CardDetails(props) {
             <p>Name: {props.details.name}</p>
             {props.details.url === "no picture selected" ? null : <URL/>}
             <p>Original Height: {props.details.height}</p>
+            <p>Cuteness: {props.details.cuteness}</p>
         </div>
     );
 }
