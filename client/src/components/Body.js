@@ -54,11 +54,9 @@ export function Body() {
             cuteness: Math.floor(Math.random() * 10)
         }
         setCardID(cardID + 1)
-        console.log(obj)
         e.preventDefault()
         axios.post("http://localhost:5000/cardlist/add", obj)
             .then((response) => {
-                console.log(response)
                 setList(response.data)
             })
     }
