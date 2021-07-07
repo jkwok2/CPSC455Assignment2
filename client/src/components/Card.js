@@ -1,20 +1,24 @@
 import React from 'react';
-import axios from 'axios';
 
 export function Card(props) {
     let origHeight = 0;
+    let imageID = props.id;
 
     function handleclick({ target: img }) {
         origHeight = img.naturalHeight;
         props.parentCallback({ name: props.name, url: props.url, height: origHeight })
     }
 
-    function handleDelete() {
-        axios.delete("http://localhost:5000/cardlist/del/" + props.id)
-            .then((response) => {
-                console.log(response)
-                window.location.reload();
-            })
+    // function handleDelete() {
+    //     axios.delete("http://localhost:5000/cardlist/del/" + props.id)
+    //         .then((response) => {
+    //             console.log(response)
+    //             window.location.reload();
+    //         })
+    // }
+
+    function handleDel() {
+        props.delCallback(imageID)
     }
 
     return (
@@ -25,7 +29,7 @@ export function Card(props) {
                 src={props.url} onClick={handleclick}
                 alt="invalid image url"></img>
             <div>
-                <button onClick={handleDelete}>Delete Card</button>
+                <button onClick={handleDel}>Delete Card</button>
             </div>
         </div>
     );

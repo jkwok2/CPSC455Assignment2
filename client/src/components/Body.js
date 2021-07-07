@@ -16,7 +16,6 @@ export function Body() {
         height: "n/a"
     });
     
-    const [index, setIndex] = useState(0);
     const [cardID, setCardID] = React.useState(0);
     
     let cardlist = []
@@ -51,13 +50,15 @@ export function Body() {
         let obj = {
             name: cardToAdd.imagename,
             url: cardToAdd.imageurl,
-            _id: cardID,
+            // _id: cardID,
             cuteness: Math.floor(Math.random() * 10)
         }
         setCardID(cardID + 1)
+        console.log(obj)
         e.preventDefault()
         axios.post("http://localhost:5000/cardlist/add", obj)
             .then((response) => {
+                console.log(response)
                 setList(response.data)
             })
     }
@@ -66,10 +67,10 @@ export function Body() {
         setDetails(childData);
     }
 
-    function handleDeleteCallback() {
-        axios.get("http://localhost:5000/cardlist")
+    function handleDeleteCallback(idData) {
+        axios.delete("http://localhost:5000/cardlist/del/" + idData.toString())
             .then((response) => {
-                setList(response.data);
+                setList(response.data)
             })
     }
 
@@ -99,7 +100,7 @@ export function Body() {
                                 url={item.url}
                                 id={item._id}
                                 parentCallback={handleCallback}
-                                onChildClick={handleDeleteCallback}
+                                delCallback={handleDeleteCallback}
                             ></Card>
                         ))}
                     </ul>
@@ -118,7 +119,7 @@ export function Body() {
                     <input type="reset" value="Clear" />
                 </form>
                 <h2>Card Details</h2>
-                <CardDetails details={details} />
+                <CardDetails details={details}/>
             </Grid>
         </Grid>
     );

@@ -35,7 +35,7 @@ router.post('/add', async function (req, res) {
         let newCardList = await Card.find();
         res.send(newCardList);
     } catch (err) {
-        res.send("failed");
+        res.send(err);
     }
     // data.push(cardToAdd);
     // console.log(cardToAdd)
@@ -62,7 +62,7 @@ router.delete('/del/:id', (req, res) => {
     // console.log(data)
     // console.log(req.params)
     try {
-        Card.deleteOne({ "_id": parseInt(req.params.id) }, async () => {
+        Card.deleteOne({ "_id": req.params.id }, async () => {
             let newCardList = await Card.find();
             res.send(newCardList);
         })
