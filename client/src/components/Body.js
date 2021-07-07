@@ -74,13 +74,17 @@ export function Body() {
     }
 
     function handleDeleteAll() {
-        setList([]);
-        let tempDetails = {
-            name: "no picture selected",
-            url: "no picture selected",
-            height: "n/a"
-        };
-        setDetails(tempDetails)
+        // setList([]);
+        // let tempDetails = {
+        //     name: "no picture selected",
+        //     url: "no picture selected",
+        //     height: "n/a"
+        // };
+        // setDetails(tempDetails)
+        axios.post("http://localhost:5000/cardlist/reset")
+            .then((response) => {
+                setList(response.data);
+            })
     }
 
     return (

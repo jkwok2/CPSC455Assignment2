@@ -10,7 +10,6 @@ const Card = mongoose.model('Card', cardSchema)
 // }
 
 router.get('/', async function (req, res) {
-    // console.log(getCards());
     // const promise = Card.find();
     // promise.then((cardstuff) => {
     //     res.send(cardstuff);
@@ -21,7 +20,7 @@ router.get('/', async function (req, res) {
         res.send(cardList);
     } catch (err) {
         res.send(err);
-    }    
+    }
 })
 
 router.post('/add', async function (req, res) {
@@ -36,11 +35,23 @@ router.post('/add', async function (req, res) {
         let newCardList = await Card.find();
         res.send(newCardList);
     } catch (err) {
-        res.send(err);
+        res.send("failed");
     }
     // data.push(cardToAdd);
     // console.log(cardToAdd)
     // res.send(data)
+})
+
+router.post('/reset', async function (req, res) {
+    try {
+        Card.deleteMany({}, async () => {
+            let newCardList = await Card.find();
+            res.send(newCardList);
+        })
+    } catch (err) {
+        console.log(err);
+        res.send("failed");
+    }
 })
 
 router.delete('/del/:id', (req, res) => {
