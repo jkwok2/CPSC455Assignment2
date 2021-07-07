@@ -50,17 +50,25 @@ router.post('/reset', async function (req, res) {
         })
     } catch (err) {
         console.log(err);
-        res.send("failed");
+        res.send("failed to reset");
     }
 })
 
 router.delete('/del/:id', (req, res) => {
-    console.log("id to delete: " + req.params.id)
-    let cardToDel = data.findIndex((card) => card.id === parseInt(req.params.id))
-    console.log(cardToDel)
-    data.splice(cardToDel, 1)
-    console.log(data)
-    res.send(data)
+    // console.log("id to delete: " + req.params._id)
+    // let cardToDel = data.findIndex((card) => card._id === parseInt(req.params._id))
+    // console.log(cardToDel)
+    // data.splice(cardToDel, 1)
+    // console.log(data)
+    // console.log(req.params)
+    try {
+        Card.deleteOne({ "_id": parseInt(req.params.id) }, async () => {
+            let newCardList = await Card.find();
+            res.send(newCardList);
+        })
+    } catch (err) {
+        res.send("failed to delete card")
+    }
 })
 
 module.exports = router;

@@ -17,7 +17,7 @@ export function Body() {
     });
     
     const [index, setIndex] = useState(0);
-    const [cardID, setCardID] = React.useState(2);
+    const [cardID, setCardID] = React.useState(0);
     
     let cardlist = []
 
