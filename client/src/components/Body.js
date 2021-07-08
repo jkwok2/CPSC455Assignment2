@@ -47,11 +47,9 @@ export function Body() {
     }
 
     function handleSubmit(e) {
-        // setList([...list, { name: cardToAdd.imagename, url: cardToAdd.imageurl }])
         let obj = {
             name: cardToAdd.imagename,
             url: cardToAdd.imageurl,
-            // _id: cardID,
             cuteness: Math.floor(Math.random() * 10)
         }
         setCardID(cardID + 1)
@@ -74,16 +72,16 @@ export function Body() {
     }
 
     function handleDeleteAll() {
-        // setList([]);
-        // let tempDetails = {
-        //     name: "no picture selected",
-        //     url: "no picture selected",
-        //     height: "n/a"
-        // };
-        // setDetails(tempDetails)
         axios.post("http://localhost:5000/cardlist/reset")
             .then((response) => {
                 setList(response.data);
+            })
+    }
+
+    function handleCutenessFilter() {
+        axios.get("http://localhost:5000/cardlist/cuteFilter")
+            .then((response) => {
+                setList(response.data)
             })
     }
 
@@ -109,6 +107,8 @@ export function Body() {
             <Grid item xs={3}>
                 <h2>Delete All Cards</h2>
                 <button onClick={handleDeleteAll}>Delete All Cards</button>
+                <h2>Select Only Cute Cards</h2>
+                <button onClick={handleCutenessFilter}>Filter</button>
                 <h2>Add Image</h2>
                 <form class="form" onSubmit={handleSubmit}>
                     <label>Name</label><br />
