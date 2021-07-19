@@ -13,11 +13,11 @@ export function Body() {
     const [details, setDetails] = useState({
         name: "no picture selected",
         url: "no picture selected",
-        height: "n/a"
+        height: "n/a",
+        cuteness: "n/a"
     });
     
-    const [index, setIndex] = useState(0);
-    const [cardID, setCardID] = React.useState(2);
+    const [cardID, setCardID] = React.useState(0);
     
     let cardlist = []
 
@@ -47,11 +47,10 @@ export function Body() {
     }
 
     function handleSubmit(e) {
-        // setList([...list, { name: cardToAdd.imagename, url: cardToAdd.imageurl }])
         let obj = {
             name: cardToAdd.imagename,
             url: cardToAdd.imageurl,
-            id: cardID
+            cuteness: Math.floor(Math.random() * 10)
         }
         setCardID(cardID + 1)
         e.preventDefault()
@@ -65,21 +64,25 @@ export function Body() {
         setDetails(childData);
     }
 
-    function handleDeleteCallback() {
-        axios.get("http://localhost:5000/cardlist")
+    function handleDeleteCallback(idData) {
+        axios.delete("http://localhost:5000/cardlist/del/" + idData.toString())
+            .then((response) => {
+                setList(response.data)
+            })
+    }
+
+    function handleDeleteAll() {
+        axios.post("http://localhost:5000/cardlist/reset")
             .then((response) => {
                 setList(response.data);
             })
     }
 
-    function handleDeleteAll() {
-        setList([]);
-        let tempDetails = {
-            name: "no picture selected",
-            url: "no picture selected",
-            height: "n/a"
-        };
-        setDetails(tempDetails)
+    function handleCutenessFilter() {
+        axios.get("http://localhost:5000/cardlist/cuteFilter")
+            .then((response) => {
+                setList(response.data)
+            })
     }
 
     return (
@@ -92,9 +95,10 @@ export function Body() {
                             <Card
                                 name={item.name}
                                 url={item.url}
-                                id={item.id}
+                                id={item._id}
+                                cuteness={item.cuteness}
                                 parentCallback={handleCallback}
-                                onChildClick={handleDeleteCallback}
+                                delCallback={handleDeleteCallback}
                             ></Card>
                         ))}
                     </ul>
@@ -103,6 +107,8 @@ export function Body() {
             <Grid item xs={3}>
                 <h2>Delete All Cards</h2>
                 <button onClick={handleDeleteAll}>Delete All Cards</button>
+                <h2>Select Only Cute Cards</h2>
+                <button onClick={handleCutenessFilter}>Filter</button>
                 <h2>Add Image</h2>
                 <form class="form" onSubmit={handleSubmit}>
                     <label>Name</label><br />
@@ -113,7 +119,7 @@ export function Body() {
                     <input type="reset" value="Clear" />
                 </form>
                 <h2>Card Details</h2>
-                <CardDetails details={details} />
+                <CardDetails details={details}/>
             </Grid>
         </Grid>
     );
