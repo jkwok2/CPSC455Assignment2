@@ -27,7 +27,7 @@ app.set('port', port);
 var server = http.createServer(app);
 
 // connect to mongoDB
-mongoose.connect(uri, {
+mongoose.connect("mongodb+srv://m001-student:cpsc455@sandbox.k5cse.mongodb.net/assignmentDB?retryWrites=true&w=majority", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
