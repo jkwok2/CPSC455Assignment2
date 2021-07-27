@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+const mongoose = require("mongoose");
+require('dotenv').config()
+const uri = process.env.ATLAS_URI;
+
+
 /**
  * Module dependencies.
  */
@@ -20,6 +25,20 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+// connect to mongoDB
+mongoose.connect(uri, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+})
+  .catch(err => console.log("couldn't connectt"));
+
+const connection = mongoose.connection;
+
+connection.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+});
 
 /**
  * Listen on provided port, on all network interfaces.
