@@ -24,7 +24,8 @@ mongoose.connect(uri, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
-});
+})
+  .catch(err => console.log("couldn't connect"));
 
 const connection = mongoose.connection;
 
