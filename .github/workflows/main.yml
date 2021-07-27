@@ -16,5 +16,6 @@ jobs:
           heroku_app_name: "tradingcard455" 
           heroku_email: "canadiankilometers@gmail.com"
           branch: "assignment5"
+          appdir: "client"
 
           
