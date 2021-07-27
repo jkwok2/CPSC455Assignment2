@@ -15,10 +15,6 @@ const cardlistRouter = require('./routes/cardlist');
 var app = express();
 app.use(cors());
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 // connect to mongoDB
 mongoose.connect(uri, {
   useUnifiedTopology: true,
@@ -32,6 +28,10 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
