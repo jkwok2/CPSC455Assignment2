@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"cd client && npm run build\" \"npm run server\"",
-    "server": "node ./bin/www"
+    "client-install": "npm install --prefix client",
+    "server": "nodemon ./bin/www",
+    "client": "npm run build --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "concurrently": "^6.2.0",

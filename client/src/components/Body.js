@@ -24,7 +24,7 @@ export function Body() {
     const [list, setList] = React.useState(cardlist);
 
     useEffect(() => {
-        axios.get("cardlist")
+        axios.get("api/cardlist")
             .then((response) => {
                 setList(response.data);
             })
@@ -54,7 +54,7 @@ export function Body() {
         }
         setCardID(cardID + 1)
         e.preventDefault()
-        axios.post("cardlist/add", obj)
+        axios.post("api/cardlist/add", obj)
             .then((response) => {
                 setList(response.data)
             })
@@ -65,21 +65,21 @@ export function Body() {
     }
 
     function handleDeleteCallback(idData) {
-        axios.delete("cardlist/del/" + idData.toString())
+        axios.delete("api/cardlist/del/" + idData.toString())
             .then((response) => {
                 setList(response.data)
             })
     }
 
     function handleDeleteAll() {
-        axios.post("cardlist/reset")
+        axios.post("api/cardlist/reset")
             .then((response) => {
                 setList(response.data);
             })
     }
 
     function handleCutenessFilter() {
-        axios.get("cardlist/cuteFilter")
+        axios.get("api/cardlist/cuteFilter")
             .then((response) => {
                 setList(response.data)
             })
