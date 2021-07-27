@@ -6,7 +6,7 @@
     "client-install": "npm install --prefix client",
     "server": "nodemon ./bin/www",
     "client": "npm run build --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "concurrently": "^6.2.0",
