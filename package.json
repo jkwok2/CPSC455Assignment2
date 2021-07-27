@@ -21,7 +21,8 @@
     "mongodb": "^3.6.9",
     "mongoose": "^5.13.2",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "saslprep": "^1.0.3"
   },
   "optionalDependencies": {
     "fsevents": "*"
